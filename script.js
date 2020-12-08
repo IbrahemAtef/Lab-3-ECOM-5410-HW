@@ -69,7 +69,7 @@ for (const i of json) {
   Ppu.push(i['ppu'])
 }
 
-const allToppingTypes = [].concat(...allTopping).filter((t) => {
+let allToppingTypes = [].concat(...allTopping).filter((t) => {
   if (ids.includes(t['id'])) {
     return false
   } else {
@@ -78,13 +78,21 @@ const allToppingTypes = [].concat(...allTopping).filter((t) => {
   }
 })
 
-const allBatterTypes = [].concat(...allBatter).filter((b) => {
+allToppingTypes = allToppingTypes.map((obj) => {
+  return obj['type']
+})
+
+let allBatterTypes = [].concat(...allBatter).filter((b) => {
   if (ids.includes(b['id'])) {
     return false
   } else {
     ids.push(b['id'])
     return true
   }
+})
+
+allBatterTypes = allBatterTypes.map((obj) => {
+  return obj['type']
 })
 
 const PpuTotal = Ppu.reduce((total, num) => {
@@ -106,3 +114,6 @@ console.log('Ppu average: ', PpuAvg)
 
 // Ppu sum
 console.log('Ppu sum: ', PpuTotal)
+
+// All ids
+console.log('All IDs: ', ids)
